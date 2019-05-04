@@ -111,6 +111,7 @@ my %applications = (
     'kdenlive'        => '',
     'analitza'        => '',
     'kcalc'           => '',
+    'komparte'        => '',
     'umbrello'        => '',
 );
 

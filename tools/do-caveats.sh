@@ -121,4 +121,7 @@ ln -sfv "$(brew --prefix)/opt/kf5-kjsembed/bin/kjsconsole.app" "$HOME/Applicatio
 #kdialog
 ln -sfv "$(brew --prefix)/opt/kdialog/bin/kdialog.app" "$HOME/Applications/KDE"
 ln -sfv "$(brew --prefix)/opt/kdialog/bin/kdialog.app/Contents/MacOS/kdialog" "$(brew --prefix)/bin"
+# kompare
+ln -sfv "$(brew --prefix)/share/kompare" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/opt/kompare/bin/kompare.app" "$HOME/Applications/KDE"
 exit 0
