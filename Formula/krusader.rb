@@ -2,8 +2,8 @@ class Krusader < Formula
   desc "Advanced twin panel (commander style) file manager"
   homepage "https://krusader.org/"
   url "https://download.kde.org/stable/krusader/2.7.2/krusader-2.7.2.tar.xz"
+  revision 2
   sha256 "41a39a43b3c42dd1d1ecaea86df30caff6a061fecc1d66f60859b2a3ca976109"
-  revision 1
   head "https://anongit.kde.org/krusader.git"
 
   depends_on "cmake" => [:build, :test]

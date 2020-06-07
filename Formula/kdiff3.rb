@@ -2,6 +2,7 @@ class Kdiff3 < Formula
   desc "File And Folder Comparison And Merge Tool"
   homepage "https://kde.org/applications/en/development/org.kde.kdiff3"
   url "https://download.kde.org/stable/kdiff3/kdiff3-1.8.2.tar.xz"
+  revision 1
   sha256 "fb7154778491dc11b9bd38465164ce1a7c2d1810f70a57cd4268ffad42d5bb68"
   head "https://invent.kde.org/sdk/kdiff3.git"
 

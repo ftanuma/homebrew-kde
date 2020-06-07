@@ -2,6 +2,7 @@ class Phonon < Formula
   desc "The multimedia framework for KF5"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/phonon/4.11.1/phonon-4.11.1.tar.xz"
+  revision 1
   sha256 "b4431ea2600df8137a717741ad9ebc7f7ec1649fa3e138541d8f42597144de2d"
   head "git://anongit.kde.org/phonon.git"
 

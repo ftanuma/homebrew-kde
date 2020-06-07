@@ -2,6 +2,7 @@ class Ktorrent < Formula
   desc "Powerful BitTorrent client for KDE"
   homepage "https://kde.org/applications/internet/ktorrent/"
   url "https://download.kde.org/stable/ktorrent/5.1.2/ktorrent-5.1.2.tar.xz"
+  revision 1
   sha256 "641427a3d6ecb18b0b28c1cc2ec3ba54612abf684df5e10e6c953cd7af058d4f"
   head "git://anongit.kde.org/ktorrent.git"
 

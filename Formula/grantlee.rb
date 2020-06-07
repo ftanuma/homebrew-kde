@@ -2,6 +2,7 @@ class Grantlee < Formula
   desc "String template engine based on the Django template system"
   homepage "http://grantlee.org"
   head "https://github.com/steveire/grantlee.git"
+  revision 1
 
   depends_on "cmake" => [:build, :test]
   depends_on "doxygen" => :build

@@ -2,6 +2,7 @@ class Kdevelop < Formula
   desc "Integrated Development Environment for KDE"
   homepage "https://kdevelop.org"
   url "https://download.kde.org/stable/kdevelop/5.5.1/src/kdevelop-5.5.1.tar.xz"
+  revision 1
   sha256 "beded25c1076fe25388a21a183404deb37ce396a66cb14eed01870b7dae41da2"
   head "git://anongit.kde.org/kdevelop.git"
 

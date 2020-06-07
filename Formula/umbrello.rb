@@ -2,6 +2,7 @@ class Umbrello < Formula
   desc "UML modeller"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/umbrello-20.04.0.tar.xz"
+  revision 1
   sha256 "49e20d11a6b98cfbbff941e8e910a2a0baa5315a4fc83839868049f24ce6036f"
   head "git://anongit.kde.org/umbrello.git"
 

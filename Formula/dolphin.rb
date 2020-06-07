@@ -2,6 +2,7 @@ class Dolphin < Formula
   desc "KDE File Manager"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/dolphin-20.04.0.tar.xz"
+  revision 1
   sha256 "3c5bb9dc0b5ba55c54eb1c13b123b34f3437c22424142cb7d1957b6ebe4ad5ba"
   head "git://anongit.kde.org/dolphin.git"
 

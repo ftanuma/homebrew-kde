@@ -2,6 +2,7 @@ class Kmymoney < Formula
   desc "Personal finance manager similar to MS-Money or Quicken"
   homepage "https://kmymoney.org"
   url "https://download.kde.org/stable/kmymoney/5.0.8/src/kmymoney-5.0.8.tar.xz"
+  revision 1
   sha256 "ac6bcef37def09ca2530276254eab5e9ae57f3a1cd5ed7c87c3d38045400d4c0"
   head "git://anongit.kde.org/kmymoney.git"
 
