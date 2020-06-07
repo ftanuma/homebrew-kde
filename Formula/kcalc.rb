@@ -2,6 +2,7 @@ class Kcalc < Formula
   desc "KCalc"
   homepage "https://utils.kde.org/projects/kcalc/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kcalc-20.04.0.tar.xz"
+  revision 1
   sha256 "316897861de9f727f3d842532260bbc3e9f6a30d6b800c87b9cb91316b71748b"
   head "git://anongit.kde.org/kcalc.git"
 
@@ -43,8 +44,10 @@ class Kcalc < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

@@ -2,6 +2,7 @@ class Konversation < Formula
   desc "User-friendly and fully-featured IRC client"
   homepage "https://www.kde.org"
   head "git://anongit.kde.org/konversation.git"
+  revision 1
 
   depends_on "cmake" => [:build, :test]
   depends_on "kde-extra-cmake-modules" => [:build, :test]
@@ -44,8 +45,10 @@ class Konversation < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

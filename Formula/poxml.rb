@@ -2,6 +2,7 @@ class Poxml < Formula
   desc "Translates DocBook XML files using gettext po files"
   homepage "https://www.kde.org/applications/development/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/poxml-20.04.0.tar.xz"
+  revision 1
   sha256 "49bf918e67f5abce1ff192da4abf1dd8352e348cda7425d4214a2163f2124e2b"
   head "git://anongit.kde.org/poxml.git"
 
@@ -26,6 +27,15 @@ class Poxml < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

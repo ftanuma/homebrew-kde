@@ -2,6 +2,7 @@ class KioExtras < Formula
   desc "Additional components to increase the functionality of KIO"
   homepage "https://www.kde.org/applications/internet/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kio-extras-20.04.0.tar.xz"
+  revision 1
   sha256 "a70f6079a8d2acb8c64bf0d08f7f7e5685f2e9c4e49548c138609437fdc6cd4d"
   head "git://anongit.kde.org/kio-extras.git"
 
@@ -54,8 +55,10 @@ class KioExtras < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

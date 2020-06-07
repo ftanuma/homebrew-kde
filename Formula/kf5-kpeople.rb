@@ -2,6 +2,7 @@ class Kf5Kpeople < Formula
   desc "Provides access to all contacts and the people"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kpeople-5.70.0.tar.xz"
+  revision 1
   sha256 "d4e7e4f29a2d7e21c418ff930d7750b9fe15994e88d5f3d0e934c99b82a71bb6"
   head "git://anongit.kde.org/kpeople.git"
 
@@ -34,8 +35,10 @@ class Kf5Kpeople < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

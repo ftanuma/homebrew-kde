@@ -2,6 +2,7 @@ class Labplot < Formula
   desc "Application for interactive graphing and analysis of scientific data"
   homepage "https://labplot.kde.org/"
   url "https://download.kde.org/stable/labplot/2.7.0/labplot-2.7.0.tar.xz"
+  revision 1
   sha256 "5c4d6ed7df6e98557a6b78f018933c92654b7e50e7f051ad89ec4755e0f4e935"
   head "git://anongit.kde.org/labplot.git"
 
@@ -46,8 +47,10 @@ class Labplot < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-         "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

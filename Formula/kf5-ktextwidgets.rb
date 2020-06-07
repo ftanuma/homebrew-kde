@@ -2,6 +2,7 @@ class Kf5Ktextwidgets < Formula
   desc "Advanced text editing widgets"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/ktextwidgets-5.70.0.tar.xz"
+  revision 1
   sha256 "fc1057c291e44a2fe7c971f3e3695924acb0f648932bc8539ee418b538cd0998"
   head "git://anongit.kde.org/ktextwidgets.git"
 
@@ -35,8 +36,10 @@ class Kf5Ktextwidgets < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

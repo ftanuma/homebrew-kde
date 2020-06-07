@@ -2,6 +2,7 @@ class Dolphin < Formula
   desc "KDE File Manager"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/dolphin-20.04.0.tar.xz"
+  revision 1
   sha256 "3c5bb9dc0b5ba55c54eb1c13b123b34f3437c22424142cb7d1957b6ebe4ad5ba"
   head "git://anongit.kde.org/dolphin.git"
 
@@ -49,8 +50,10 @@ class Dolphin < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

@@ -2,6 +2,7 @@ class Kf5Kunitconversion < Formula
   desc "Support for unit conversion"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kunitconversion-5.70.0.tar.xz"
+  revision 1
   sha256 "d63e7646a8059fb333f95b27548044e897b38ed5c939db416c0c1077bf7be46a"
   head "git://anongit.kde.org/kunitconversion.git"
 
@@ -28,6 +29,15 @@ class Kf5Kunitconversion < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

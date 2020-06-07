@@ -2,6 +2,7 @@ class KdevelopPgQt < Formula
   desc "LL(1) parser generator based on Qt"
   homepage "https://kdevelop.org"
   url "https://download.kde.org/stable/kdevelop-pg-qt/2.2.1/src/kdevelop-pg-qt-2.2.1.tar.xz"
+  revision 1
   sha256 "c13931788ac9dc02188cdd9c6e71e164ae81b4568b048748652bbf6fa4a9c62b"
   head "git://anongit.kde.org/kdevelop-pg-qt.git"
 
@@ -23,6 +24,15 @@ class KdevelopPgQt < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

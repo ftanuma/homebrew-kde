@@ -2,6 +2,7 @@ class Kf5Kdeclarative < Formula
   desc "Provides integration of QML and KDE Frameworks"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kdeclarative-5.70.0.tar.xz"
+  revision 1
   sha256 "8914c2266d7ea32f8028aee13ae5a7f39a3583f7ec74a74584577fb0f2bc09ef"
   head "git://anongit.kde.org/kdeclarative.git"
 
@@ -31,6 +32,15 @@ class Kf5Kdeclarative < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

@@ -2,6 +2,7 @@ class Kf5Kconfigwidgets < Formula
   desc "Widgets for KConfig"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kconfigwidgets-5.70.0.tar.xz"
+  revision 1
   sha256 "bfa73d28d33397c91aaaac71809c21933f0e0194deba3d3c3ad78decede1ada4"
   head "git://anongit.kde.org/kconfigwidgets.git"
 
@@ -34,6 +35,15 @@ class Kf5Kconfigwidgets < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

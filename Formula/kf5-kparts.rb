@@ -2,6 +2,7 @@ class Kf5Kparts < Formula
   desc "Document centric plugin system"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kparts-5.70.0.tar.xz"
+  revision 1
   sha256 "533f41d1a37122aab73feec9014e362b2aa345903af0de7e973a7f5350eecabd"
   head "git://anongit.kde.org/kparts.git"
 
@@ -31,8 +32,10 @@ class Kf5Kparts < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

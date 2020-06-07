@@ -2,6 +2,7 @@ class Kf5Qqc2DesktopStyle < Formula
   desc "Style for Qt QC2 to follow your desktop theme"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/qqc2-desktop-style-5.70.0.tar.xz"
+  revision 1
   sha256 "43cfb6b2e249621576dfa43b8e6ab08e68be0ccf04d038bde10d7f81006587d8"
   head "git://anongit.kde.org/qqc2-desktop-style.git"
 
@@ -25,6 +26,15 @@ class Kf5Qqc2DesktopStyle < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

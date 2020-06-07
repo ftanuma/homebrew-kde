@@ -2,6 +2,7 @@ class Kf5Kdesu < Formula
   desc "Integration with su for elevated privileges"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kdesu-5.70.0.tar.xz"
+  revision 1
   sha256 "b53806e2edc5c9e5e326b9c189fa2f06ebb4d02009945c5b2f123f2ecf4b629e"
   head "git://anongit.kde.org/kdesu.git"
 
@@ -29,6 +30,15 @@ class Kf5Kdesu < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

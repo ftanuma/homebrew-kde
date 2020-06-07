@@ -2,6 +2,7 @@ class Okular < Formula
   desc "Document Viewer"
   homepage "https://okular.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/okular-20.04.0.tar.xz"
+  revision 1
   sha256 "1b6521b4eaa0a0eb41a39c3f84252d9833f6d26fa410afaef815ec661737dfe7"
   head "git://anongit.kde.org/okular.git"
 
@@ -86,8 +87,10 @@ class Okular < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

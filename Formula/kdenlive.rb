@@ -2,6 +2,7 @@ class Kdenlive < Formula
   desc "Video editor"
   homepage "https://www.kdenlive.org/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kdenlive-20.04.0.tar.xz"
+  revision 1
   sha256 "3d56657af2c3946bd44ee821be48fb777457de3a9123485e7a3a3f51de0f9e52"
   head "git://anongit.kde.org/kdenlive.git"
 
@@ -59,16 +60,10 @@ class Kdenlive < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
-
-      OTHER NOTES
-      -----------
-      When starting the program it may be crash, solved it changing in ~/Library/Preferences/kdenliverc
-      from true to false: Window-Maximized = false
-      For ffmpeg, you could install --with-: chromaprint fdk-aac fontconfig freetype frei0r game-music-emu libass libbluray libbs2b libcaca libgsm libmodplug libsoxr libssh libvidstab libvorbis libvpx opencore-amr openh264 openjpeg openssl opus rtmpdump rubberband sdl2 snappy speex srt tesseract theora tools two-lame wavpack webp x265 xz zeromq zimg
-
-      There seems to be a problem with librsvg
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

@@ -2,6 +2,7 @@ class Kdeconnect < Formula
   desc "Adds communication between KDE and your smartphone"
   homepage "https://community.kde.org/KDEConnect"
   url "https://download.kde.org/stable/kdeconnect/1.4/kdeconnect-kde-1.4.tar.xz"
+  revision 1
   sha256 "caee7945a9d9bb881a943dc8d2fd0d702c04da5bdb2df14d4f875e7cf5d5261a"
   head "https://github.com/KDE/kdeconnect-kde.git"
 
@@ -35,6 +36,15 @@ class Kdeconnect < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

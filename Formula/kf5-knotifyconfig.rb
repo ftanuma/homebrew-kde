@@ -2,6 +2,7 @@ class Kf5Knotifyconfig < Formula
   desc "Configuration system for KNotify"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/knotifyconfig-5.70.0.tar.xz"
+  revision 1
   sha256 "f2012fd1e774b3e61d1e52c0f09185841cf4c2a6131cca36d6bc2aff321e88b4"
   head "git://anongit.kde.org/knotifyconfig.git"
 
@@ -27,6 +28,15 @@ class Kf5Knotifyconfig < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

@@ -2,6 +2,7 @@ class Kf5Kwindowsystem < Formula
   desc "Access to the windowing system"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kwindowsystem-5.70.0.tar.xz"
+  revision 1
   sha256 "9003fded6cb8338521024bdcfccc4d36336f3f9cc9a4e6ba4eaa50bd8064c828"
   head "git://anongit.kde.org/kwindowsystem.git"
 
@@ -27,6 +28,15 @@ class Kf5Kwindowsystem < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

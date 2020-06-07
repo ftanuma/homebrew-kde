@@ -2,6 +2,7 @@ class Libktorrent < Formula
   desc "BitTorrent protocol implementation"
   homepage "https://www.kde.org/applications/internet/ktorrent/"
   url "https://download.kde.org/stable/ktorrent/5.1.2/libktorrent-2.1.1.tar.xz"
+  revision 1
   sha256 "5cc45c0b50a1b6b2ce64ad0384128f4ac3bc0e4a1417eb58e5e992b510fca100"
   head "git://anongit.kde.org/libktorrent.git"
 
@@ -25,6 +26,15 @@ class Libktorrent < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

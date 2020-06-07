@@ -2,6 +2,7 @@ class Kolourpaint < Formula
   desc "Paint Program"
   homepage "https://kde.org/applications/graphics/kolourpaint/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kolourpaint-20.04.0.tar.xz"
+  revision 1
   sha256 "e3f26fa76b171d06c1fac3926ebfb90da47bacb64989527a4c7bef54349b63fb"
   head "git://anongit.kde.org/kolourpaint.git"
 
@@ -41,8 +42,10 @@ class Kolourpaint < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

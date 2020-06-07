@@ -2,6 +2,7 @@ class Krename < Formula
   desc "Very powerful batch file renamer"
   homepage "https://userbase.kde.org/KRename"
   url "https://download.kde.org/stable/krename/5.0.0/src/krename-5.0.0.tar.xz"
+  revision 1
   sha256 "0a61761853787fd46b35f3a733cf87cde00de5df631728332a64c38c670bd28c"
   head "git://anongit.kde.org/krename.git"
   head "git://anongit.kde.org/krename.git"
@@ -42,8 +43,10 @@ class Krename < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

@@ -2,6 +2,7 @@ class Kf5Solid < Formula
   desc "Hardware integration and detection"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/solid-5.70.0.tar.xz"
+  revision 1
   sha256 "e76b0f2d64853dcfa7e5887e9733d4e9821bba6e68e62f3488b21b1ed979962a"
   head "git://anongit.kde.org/solid.git"
 
@@ -32,6 +33,15 @@ class Kf5Solid < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

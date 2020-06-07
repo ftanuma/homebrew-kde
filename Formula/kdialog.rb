@@ -2,6 +2,7 @@ class Kdialog < Formula
   desc "Utility for displaying dialog boxes from shell scripts"
   homepage "https://kde.org/applications/utilities/org.kde.kdialog"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kdialog-20.04.0.tar.xz"
+  revision 1
   sha256 "3e05c6fac266ef48a8adb2f13451f04c4f956d7c9f150f9cff639165ee6793db"
   head "git://anongit.kde.org/dolphin.git"
 
@@ -44,8 +45,10 @@ class Kdialog < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

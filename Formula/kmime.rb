@@ -2,6 +2,7 @@ class Kmime < Formula
   desc "Library for handling mail messages and newsgroup articles"
   homepage "https://community.kde.org/KDE_PIM"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kmime-20.04.0.tar.xz"
+  revision 1
   sha256 "4230ca0147d31fa688cf84ac8e7bb46e64deb9536b7a25544be73171615c8fac"
   head "git://anongit.kde.org/kmime.git"
 
@@ -26,6 +27,15 @@ class Kmime < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

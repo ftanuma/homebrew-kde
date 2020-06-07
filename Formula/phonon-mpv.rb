@@ -4,6 +4,7 @@ class PhononMpv < Formula
   url "https://github.com/OpenProgger/phonon-mpv/archive/v0.0.7.tar.gz"
   sha256 "c674e982d81dcdb2cfca3244e55a4c1e5b35cfc4bed3c7bd65921358d8a0ebc6"
   head "https://github.com/OpenProgger/phonon-mpv.git"
+  revision 1
 
   depends_on "cmake" => [:build, :test]
   depends_on "ninja" => :build
@@ -21,6 +22,15 @@ class PhononMpv < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

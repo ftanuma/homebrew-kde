@@ -2,6 +2,7 @@ class Analitza < Formula
   desc "Library to add mathematical features to your program"
   homepage "https://edu.kde.org/"
   url "https://download.kde.org/stable/release-service/20.04.0/src/analitza-20.04.0.tar.xz"
+  revision 1
   sha256 "d4c719af3e918c4c999b8a31746bff8e946908fcaa11b25178e1c3dd908c0ff7"
   head "git://anongit.kde.org/analitza.git"
 
@@ -24,6 +25,15 @@ class Analitza < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

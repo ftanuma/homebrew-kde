@@ -2,6 +2,7 @@ class Kimap < Formula
   desc "Job-based API for interacting with IMAP servers"
   homepage "https://community.kde.org/KDE_PIM"
   url "https://download.kde.org/stable/release-service/20.04.0/src/kimap-20.04.0.tar.xz"
+  revision 1
   sha256 "f1261b831cfa4a5fbec3d04d773be229f61ef61a7d9363e951436100a832a460"
   head "git://anongit.kde.org/kimap.git"
 
@@ -26,6 +27,15 @@ class Kimap < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

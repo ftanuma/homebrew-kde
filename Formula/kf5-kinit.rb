@@ -2,6 +2,7 @@ class Kf5Kinit < Formula
   desc "Process launcher to speed up launching KDE applications"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kinit-5.70.0.tar.xz"
+  revision 1
   sha256 "719abdd2ff3c0d60083190177d021fdd9d9d7b06c7e949ae935db57091869cf4"
   head "git://anongit.kde.org/kinit.git"
 
@@ -27,6 +28,15 @@ class Kf5Kinit < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

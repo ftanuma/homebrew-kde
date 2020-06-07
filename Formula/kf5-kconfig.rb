@@ -2,6 +2,7 @@ class Kf5Kconfig < Formula
   desc "Configuration system"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kconfig-5.70.0.tar.xz"
+  revision 1
   sha256 "3679034b2f4b637caa0c87eec9487aa8431fe43246bac84842801d7e1d2470e8"
   head "git://anongit.kde.org/kconfig.git"
 
@@ -27,6 +28,15 @@ class Kf5Kconfig < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

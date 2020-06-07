@@ -2,8 +2,8 @@ class Atcore < Formula
   desc "API to manage the connection to 3D Printers"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/atcore/1.0.0/atcore-1.0.0.tar.xz"
+  revision 3
   sha256 "ffd12455c9b8db853e455a437d6c6b601e0003c6732bbc6c2828032e004530e2"
-  revision 2
   head "git://anongit.kde.org/atcore.git"
 
   option "with-gui", "Build atcore-gui (HEAD ONLY)"
@@ -38,8 +38,10 @@ class Atcore < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

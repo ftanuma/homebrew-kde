@@ -2,6 +2,7 @@ class Konsole < Formula
   desc "KDE's terminal emulator"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/konsole-20.04.0.tar.xz"
+  revision 1
   sha256 "179b2bb442e13c22032e56457986c68074b31a5c2da67e0e6e854658a37e24de"
   head "git://anongit.kde.org/konsole.git"
 
@@ -44,8 +45,10 @@ class Konsole < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

@@ -2,6 +2,7 @@ class Libkexiv2 < Formula
   desc "Library to manipulate pictures metadata"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/release-service/20.04.0/src/libkexiv2-20.04.0.tar.xz"
+  revision 1
   sha256 "6456ed484817a4556b960faa4b8e290122f9aa222c86664177e862527c30c67e"
   head "git://anongit.kde.org/libkexiv2.git"
 
@@ -24,6 +25,15 @@ class Libkexiv2 < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

@@ -2,6 +2,7 @@ class Kf5Kservice < Formula
   desc "Advanced plugin and service introspection"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kservice-5.70.0.tar.xz"
+  revision 1
   sha256 "7c46ac934eff78794233f2a49338385d862aeb5483c49d0da1edb83046b9893c"
   head "git://anongit.kde.org/kservice.git"
 
@@ -38,8 +39,10 @@ class Kf5Kservice < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 

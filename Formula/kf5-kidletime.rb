@@ -2,6 +2,7 @@ class Kf5Kidletime < Formula
   desc "Monitoring user activity"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kidletime-5.70.0.tar.xz"
+  revision 1
   sha256 "a5c25a1b6846e4eec2099a81789456da7aa60ee51f75cafaea024ea400d27d6d"
   head "git://anongit.kde.org/kidletime.git"
 
@@ -27,6 +28,15 @@ class Kf5Kidletime < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

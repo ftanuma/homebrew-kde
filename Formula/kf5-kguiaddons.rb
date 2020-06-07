@@ -2,6 +2,7 @@ class Kf5Kguiaddons < Formula
   desc "Addons to QtGui"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kguiaddons-5.70.0.tar.xz"
+  revision 1
   sha256 "b43c80e10dea65c7f9325d9ba26a2b95aa8586f697b14e0e84f4ffb46093cdfa"
   head "git://anongit.kde.org/kguiaddons.git"
 
@@ -27,6 +28,15 @@ class Kf5Kguiaddons < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
   end
 
   test do

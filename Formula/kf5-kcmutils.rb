@@ -2,6 +2,7 @@ class Kf5Kcmutils < Formula
   desc "Utilities for interacting with KCModules"
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.70/kcmutils-5.70.0.tar.xz"
+  revision 1
   sha256 "bfc6a8e8d420c276474805949b8f4ab0c298b8de70827b6f0b342f434af6c421"
   head "git://anongit.kde.org/kcmutils.git"
 
@@ -31,8 +32,10 @@ class Kf5Kcmutils < Formula
 
   def caveats
     <<~EOS
-      You need to take some manual steps in order to make this formula work:
-        "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
     EOS
   end
 
