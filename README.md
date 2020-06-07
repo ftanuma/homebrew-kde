@@ -1,6 +1,6 @@
-# Deprecated
+# Moved
 
-**This repo is deprecated, new repo is [invent.kde.org/packaging/homebrew-kde](https://invent.kde.org/packaging/homebrew-kde)**
+**This repo is now deprecated, we have moved to KDE Invent: [invent.kde.org/packaging/homebrew-kde](https://invent.kde.org/packaging/homebrew-kde)**
 
 In order to migrate to the new repo please run the following in terminal:
 
