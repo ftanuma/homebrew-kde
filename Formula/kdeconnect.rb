@@ -37,6 +37,15 @@ class Kdeconnect < Formula
     end
   end
 
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
+  end
+
   test do
     assert `"#{bin}/kdeconnect-cli" --help | grep -- --help` =~ /--help/
   end
