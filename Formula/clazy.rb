@@ -1,40 +1,15 @@
 class Clazy < Formula
-  desc "Qt oriented code checker based on clang framework"
-  homepage "https://github.com/KDE/clazy"
-  url "https://download.kde.org/stable/clazy/1.6/src/clazy-1.6.tar.xz"
-  revision 1
-  sha256 "806d1befaddba82316f4ea34f1cba38bcc7545d0981007e3527c1ff1576dd0de"
-  head "git://anongit.kde.org/clazy.git"
+  desc "We have moved our repo to KDE Invent"
+  homepage "https://invent.kde.org/packaging/homebrew-kde"
+  url "file:///dev/null"
+  version "666"
 
-  depends_on "cmake" => [:build, :test]
-  depends_on "ninja" => :build
+  ohai "We have moved our repo to KDE Invent."
 
-  depends_on "llvm"
-  depends_on "qt"
+  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
 
-  def install
-    args = std_cmake_args
-    args << "-DBUILD_TESTING=OFF"
-    args << "-DCMAKE_INSTALL_MANDIR=#{man}"
-
-    mkdir "build" do
-      system "cmake", "-G", "Ninja", "..", *args
-      system "ninja"
-      system "ninja", "install"
-      prefix.install "install_manifest.txt"
-    end
-  end
-
-  def caveats
-    <<~EOS
-      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
-      Please run the following commands in order to receive updates:
-        brew untap kde-mac/kde
-        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    EOS
-  end
-
-  test do
-    assert `"#{bin}/clazy-standalone" --help | grep -- -help` =~ /-help/
-  end
+  odie "In order to continue using our packages, please run the following command:
+    brew untap kde-mac/kde
+    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
 end

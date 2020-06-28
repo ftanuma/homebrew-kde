@@ -1,53 +1,15 @@
 class Kdeconnect < Formula
-  desc "Adds communication between KDE and your smartphone"
-  homepage "https://community.kde.org/KDEConnect"
-  url "https://download.kde.org/stable/kdeconnect/1.4/kdeconnect-kde-1.4.tar.xz"
-  revision 1
-  sha256 "caee7945a9d9bb881a943dc8d2fd0d702c04da5bdb2df14d4f875e7cf5d5261a"
-  head "https://github.com/KDE/kdeconnect-kde.git"
+  desc "We have moved our repo to KDE Invent"
+  homepage "https://invent.kde.org/packaging/homebrew-kde"
+  url "file:///dev/null"
+  version "666"
 
-  depends_on "cmake" => [:build, :test]
-  depends_on "kde-extra-cmake-modules" => [:build, :test]
-  depends_on "KDE-mac/kde/kf5-kdeclarative" => :build
-  depends_on "ninja" => :build
-  depends_on "gettext"
-  depends_on "hicolor-icon-theme"
-  depends_on "KDE-mac/kde/kf5-kcmutils"
-  depends_on "KDE-mac/kde/kf5-kconfigwidgets"
-  depends_on "KDE-mac/kde/kf5-kdbusaddons"
-  depends_on "KDE-mac/kde/kf5-ki18n"
-  depends_on "KDE-mac/kde/kf5-kiconthemes"
-  depends_on "KDE-mac/kde/kf5-kio"
-  depends_on "KDE-mac/kde/kf5-kirigami2"
-  depends_on "KDE-mac/kde/kf5-knotifications"
-  depends_on "KDE-mac/kde/kf5-kservice"
-  depends_on "qca"
-  depends_on "qt"
-  depends_on "KDE-mac/kde/kf5-kdoctools" => :optional
+  ohai "We have moved our repo to KDE Invent."
 
-  def install
-    args = std_cmake_args
-    args << "-DBUILD_TESTING=OFF"
-    args << "-DCMAKE_INSTALL_BUNDLEDIR=#{bin}"
+  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
 
-    mkdir "build" do
-      system "cmake", "-G", "Ninja", "..", *args
-      system "ninja"
-      system "ninja", "install"
-      prefix.install "install_manifest.txt"
-    end
-  end
-
-  def caveats
-    <<~EOS
-      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
-      Please run the following commands in order to receive updates:
-        brew untap kde-mac/kde
-        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    EOS
-  end
-
-  test do
-    assert `"#{bin}/kdeconnect-cli" --help | grep -- --help` =~ /--help/
-  end
+  odie "In order to continue using our packages, please run the following command:
+    brew untap kde-mac/kde
+    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
 end
