@@ -1,15 +1,42 @@
 class Libkomparediff2 < Formula
-  desc "We have moved our repo to KDE Invent"
-  homepage "https://invent.kde.org/packaging/homebrew-kde"
-  url "file:///dev/null"
-  version "666"
+  desc "Library to compare files and strings"
+  homepage "https://www.kde.org"
+  url "https://download.kde.org/stable/release-service/20.04.0/src/libkomparediff2-20.04.0.tar.xz"
+  revision 1
+  sha256 "a4f0d91a274bbc7e7a47d428be5e252750d081499c2e2514b8691a051aaa35f5"
+  head "git://anongit.kde.org/libkomparediff2.git"
 
-  ohai "We have moved our repo to KDE Invent."
+  depends_on "cmake" => [:build, :test]
+  depends_on "kde-extra-cmake-modules" => [:build, :test]
+  depends_on "ninja" => :build
 
-  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
+  depends_on "KDE-mac/kde/kf5-kio"
 
-  odie "In order to continue using our packages, please run the following command:
-    brew untap kde-mac/kde
-    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
+  def install
+    args = std_cmake_args
+    args << "-DBUILD_TESTING=OFF"
+    args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
+    args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+
+    mkdir "build" do
+      system "cmake", "-G", "Ninja", "..", *args
+      system "ninja"
+      system "ninja", "install"
+      prefix.install "install_manifest.txt"
+    end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(LibKompareDiff2 REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
+  end
 end

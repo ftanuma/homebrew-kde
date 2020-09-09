@@ -1,15 +1,78 @@
 class Kf5Kross < Formula
-  desc "We have moved our repo to KDE Invent"
-  homepage "https://invent.kde.org/packaging/homebrew-kde"
-  url "file:///dev/null"
-  version "666"
+  desc "Embedding of scripting into applications"
+  homepage "https://api.kde.org/frameworks/kross/html"
+  url "https://download.kde.org/stable/frameworks/5.70/portingAids/kross-5.70.0.tar.xz"
+  revision 1
+  sha256 "e59859824aaee9207819aa82e463dae9d2c8d46a7e047383208e6511e8116589"
+  head "git://anongit.kde.org/kross.git"
 
-  ohai "We have moved our repo to KDE Invent."
+  depends_on "cmake" => [:build, :test]
+  depends_on "gettext" => :build
+  depends_on "kde-extra-cmake-modules" => [:build, :test]
+  depends_on "KDE-mac/kde/kf5-kdoctools" => :build
+  depends_on "ninja" => :build
 
-  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
+  depends_on "KDE-mac/kde/kf5-kparts"
 
-  odie "In order to continue using our packages, please run the following command:
-    brew untap kde-mac/kde
-    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
+  patch :DATA
+
+  def install
+    args = std_cmake_args
+    args << "-DBUILD_TESTING=OFF"
+    args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
+    args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
+
+    mkdir "build" do
+      system "cmake", "-G", "Ninja", "..", *args
+      system "ninja"
+      system "ninja", "install"
+      prefix.install "install_manifest.txt"
+    end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
+  end
+
+  test do
+    assert `"#{bin}"/kf5kross --help | grep -- --help` =~ /--help/
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5Kross REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
+  end
 end
+
+# Mark executable as nongui type
+
+__END__
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c729c33..aaeb1df 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -20,6 +20,8 @@ include(ECMGenerateHeaders)
+
+ include(ECMQtDeclareLoggingCategory)
+
++include(ECMMarkNonGuiExecutable)
++
+ include(KDEInstallDirs)
+ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+ include(KDECMakeSettings)
+diff --git a/src/console/CMakeLists.txt b/src/console/CMakeLists.txt
+index 8e15a1a..6808f52 100644
+--- a/src/console/CMakeLists.txt
++++ b/src/console/CMakeLists.txt
+@@ -7,4 +7,5 @@ target_link_libraries(kf5kross
+    Qt5::Widgets
+ )
+
++ecm_mark_nongui_executable(kf5kross)
+ install(TARGETS kf5kross ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -1,15 +1,46 @@
 class Drkonqi < Formula
-  desc "We have moved our repo to KDE Invent"
-  homepage "https://invent.kde.org/packaging/homebrew-kde"
-  url "file:///dev/null"
-  version "666"
+  desc "The KDE Crash Handler"
+  homepage "https://www.kde.org"
+  url "https://download.kde.org/stable/plasma/5.18.5/drkonqi-5.18.5.tar.xz"
+  revision 1
+  sha256 "b1a626c4ed2f9de8f8bc3359d8827e7fa6ac17486b8477674e47627fcf6efad1"
+  head "git://anongit.kde.org/drkonqi.git"
 
-  ohai "We have moved our repo to KDE Invent."
+  depends_on "cmake" => [:build, :test]
+  depends_on "doxygen" => :build
+  depends_on "graphviz" => :build
+  depends_on "kde-extra-cmake-modules" => [:build, :test]
+  depends_on "ninja" => :build
 
-  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
+  depends_on "KDE-mac/kde/kf5-kidletime"
+  depends_on "KDE-mac/kde/kf5-kxmlrpcclient"
 
-  odie "In order to continue using our packages, please run the following command:
-    brew untap kde-mac/kde
-    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
+  def install
+    args = std_cmake_args
+    args << "-DBUILD_TESTING=OFF"
+    args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
+    args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
+    args << "-DCMAKE_INSTALL_LIBEXECDIR=lib"
+
+    mkdir "build" do
+      system "cmake", "-G", "Ninja", "..", *args
+      system "ninja"
+      system "ninja", "install"
+      prefix.install "install_manifest.txt"
+    end
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
+  end
+
+  test do
+    assert_predicate lib/"drkonqi", :exist?
+  end
 end

@@ -1,15 +1,68 @@
 class Kate < Formula
-  desc "We have moved our repo to KDE Invent"
-  homepage "https://invent.kde.org/packaging/homebrew-kde"
-  url "file:///dev/null"
-  version "666"
+  desc "Advanced KDE Text Editor"
+  homepage "https://kate-editor.org"
+  url "https://download.kde.org/stable/release-service/20.04.0/src/kate-20.04.0.tar.xz"
+  revision 1
+  sha256 "fe36f9a612c580d6e0067f9e83ad28722e88e99796ad971a0afe916907be2cd2"
+  head "git://anongit.kde.org/kate.git"
 
-  ohai "We have moved our repo to KDE Invent."
+  depends_on "cmake" => [:build, :test]
+  depends_on "kde-extra-cmake-modules" => [:build, :test]
+  depends_on "KDE-mac/kde/kf5-kdoctools" => :build
+  depends_on "KDE-mac/kde/kf5-plasma-framework" => :build
+  depends_on "ninja" => :build
 
-  opoo "GitHub repo is discontinued, archived and will no longer receive updates."
+  depends_on "hicolor-icon-theme"
+  depends_on "KDE-mac/kde/kf5-breeze-icons"
+  depends_on "KDE-mac/kde/kf5-kactivities"
+  depends_on "KDE-mac/kde/kf5-kitemmodels"
+  depends_on "KDE-mac/kde/kf5-knewstuff"
+  depends_on "KDE-mac/kde/kf5-ktexteditor"
+  depends_on "KDE-mac/kde/kf5-threadweaver"
 
-  odie "In order to continue using our packages, please run the following command:
-    brew untap kde-mac/kde
-    brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
-    `$(brew --repo kde-mac/kde)/tools/do-caveats.sh`"
+  depends_on "KDE-mac/kde/konsole" => [:optional]
+
+  def install
+    args = std_cmake_args
+    args << "-DBUILD_TESTING=OFF"
+    args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
+    args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DCMAKE_INSTALL_BUNDLEDIR=#{bin}"
+
+    mkdir "build" do
+      system "cmake", "-G", "Ninja", "..", *args
+      system "ninja"
+      system "ninja", "install"
+      prefix.install "install_manifest.txt"
+    end
+    # Extract Qt plugin path
+    qtpp = `#{Formula["qt"].bin}/qtpaths --plugin-dir`.chomp
+    system "/usr/libexec/PlistBuddy",
+      "-c", "Add :LSEnvironment:QT_PLUGIN_PATH string \"#{qtpp}\:#{HOMEBREW_PREFIX}/lib/qt5/plugins\"",
+      "#{bin}/kate.app/Contents/Info.plist"
+    system "/usr/libexec/PlistBuddy",
+      "-c", "Add :LSEnvironment:QT_PLUGIN_PATH string \"#{qtpp}\:#{HOMEBREW_PREFIX}/lib/qt5/plugins\"",
+      "#{bin}/kwrite.app/Contents/Info.plist"
+  end
+
+  def post_install
+    mkdir_p HOMEBREW_PREFIX/"share/kate"
+    mkdir_p HOMEBREW_PREFIX/"share/kwrite"
+    ln_sf HOMEBREW_PREFIX/"share/icons/breeze/breeze-icons.rcc", HOMEBREW_PREFIX/"share/kate/icontheme.rcc"
+    ln_sf HOMEBREW_PREFIX/"share/icons/breeze/breeze-icons.rcc", HOMEBREW_PREFIX/"share/kwrite/icontheme.rcc"
+  end
+
+  def caveats
+    <<~EOS
+      kde-mac/kde tap is now moved to KDE Invent. Old repo will not receive updates. 
+      Please run the following commands in order to receive updates:
+        brew untap kde-mac/kde
+        brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+    EOS
+  end
+
+  test do
+    assert `"#{bin}/kate.app/Contents/MacOS/kate" --help | grep -- --help` =~ /--help/
+    assert `"#{bin}/kwrite.app/Contents/MacOS/kwrite" --help | grep -- --help` =~ /--help/
+  end
 end
